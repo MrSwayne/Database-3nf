@@ -1,3 +1,5 @@
+//If all sales for a specific customer have been removed, they themselves are deleted from the Customers table and their address is removed from the addresses table
+
 CREATE TRIGGER DeleteCustomer
 AFTER DELETE ON Sales
 FOR EACH ROW BEGIN
