@@ -15,15 +15,16 @@ CREATE PROCEDURE addProductBySupplierName(
 		   	  FROM Suppliers
 		     	WHERE SupplierName = C)
 
-	IF(@SupplierID IS NULL) 
+	IF(@SupplierID IS NULL) THEN
 		SET @SupplierID = 'S0000'
 	END IF;
 
 	INSERT INTO Products(ProductID, ProductType, SupplierID, Float) VALUES(A, B,@SupplierID, D);
 
-END;//
+END//
 	
 	
+//You can add a sale by customer name instead of id
 
 delimiter//
 CREATE PROCEDURE addSaleByNames(
@@ -41,10 +42,23 @@ CREATE PROCEDURE addSaleByNames(
 			   FROM Customers
 			   WHERE CustomerName = b)
 	
-	IF(@CustomerID IS NULL)
+	IF(@CustomerID IS NULL) THEN
 		SET @CustomerID = 'C0000'
 	END IF;
 	
 	INSERT INTO Sales(a, @CustomerID, c, d, e)
 	
-END;//
+END//
+
+delimiter//
+CREATE FUNCTION CustomerExists(
+	c VARCHAR(32)
+)
+	RETURNS BOOLEAN
+
+	IF c IN (SELECT CustomerName FROM Customers) THEN 
+		RETURN TRUE;
+	ELSE						
+		RETURN FALSE;
+	END IF;
+END//
