@@ -1,5 +1,3 @@
-//If all sales for a specific customer have been removed, they themselves are deleted from the Customers table and their address is removed from the addresses table
-
 delimiter //
 CREATE TRIGGER DeleteCustomer
 AFTER DELETE ON Sales
@@ -19,7 +17,6 @@ END;
 //
 
 
-//If a price is added and it's 1000, set it to 999.99, also if a price is less than 1 euro then set it to 100
 delimiter //
 CREATE TRIGGER ChangePrice
 BEFORE UPDATE ON Products
